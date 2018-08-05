@@ -1,21 +1,26 @@
+const {
+  APP_LOCATION
+} = process.env
 module.exports = {
-  ios:[{
-    "browserName": '',
-    "platformName": "iOS",
-    "platformVersion": "10.3",
-    "deviceName": "iPhone 7",
-    "automationName": "XCUITest",
-    "app": "/Users/tedcheng/Downloads/TestApp-2.app",
-    "metadata": {
-      browser: {
-        name: 'chrome',
-        version: '58'
-      },
-      device: 'MacBook Pro 15',
-      platform: {
-        name: 'OSX',
-        version: '10.12.6'
-      }
-    }
-  }]
+  ios: [{
+    'app': APP_LOCATION ,
+    'appiumVersion': '1.8.1',
+    'browserName': '',
+    'deviceName': 'iPhone 8',
+    'deviceOrientation': 'portrait',
+    'platformVersion': '11.4',
+    'platformName': 'iOS',
+    'maxInstances': 1,
+  }],
+  sl_ios: [{
+    'app': APP_LOCATION ,
+    'appiumVersion': '1.8.1',
+    'browserName': '',
+    'deviceName': 'iPhone 7',
+    'deviceOrientation': 'portrait',
+    'platformVersion': '10.3',
+    'platformName': 'iOS',
+    'maxInstances': 1,
+  }],
+
 }

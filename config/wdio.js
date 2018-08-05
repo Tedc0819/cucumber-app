@@ -6,22 +6,35 @@ const {
   TEST_REPORT_NAME,
   PROJECT_NAME,
   RELEASE_VERSION,
+  SAUCE_USERNAME,
+  SAUCE_ACCESS_KEY,
 } = process.env
 
 const capabilities = require('./capabilities.js')[TEST_CAPABILITIES]
 const tags = TEST_TAG || ''
 const reportDir = `./reports/${TEST_REPORT_NAME}`
 
-module.exports = {
+const sauceServer = {
+  services: ['sauce'],
+  user: SAUCE_USERNAME,
+  key: SAUCE_ACCESS_KEY,
+//  sauceConnect: true,
+}
+
+const appiumServer = {
   host: TEST_SERVER_HOST,
   port: TEST_SERVER_PORT,
+}
+
+module.exports = {
+  ...(SAUCE_ACCESS_KEY ? sauceServer : appiumServer),
+  maxInstances: 1,
   specs: [
       './features/**/*.feature'
   ],
   exclude: [
       // 'path/to/excluded/files'
   ],
-  maxInstances: 10,
   capabilities,
   sync: true,
   logLevel: 'verbose',

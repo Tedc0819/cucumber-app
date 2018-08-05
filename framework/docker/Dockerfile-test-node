@@ -1,0 +1,15 @@
+FROM node:8.11.3
+MAINTAINER Ted Cheng
+
+ENV APP_DIR=/app
+
+COPY package.json $APP_DIR/package.json
+
+RUN cd $APP_DIR \
+    && npm install
+
+COPY . $APP_DIR
+
+WORKDIR $APP_DIR
+
+CMD set -o errexit; ./node_modules/.bin/wdio

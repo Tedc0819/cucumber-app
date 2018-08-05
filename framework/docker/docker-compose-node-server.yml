@@ -1,0 +1,25 @@
+version: '2'
+
+services:
+  hub:
+    image: selenium/hub
+    ports:
+      - "4444:4444"
+    expose:
+      - "4444"
+    environment:
+      - GRID_TIMEOUT=0
+  jenkins:
+    build: 
+      context: ../
+      dockerfile: ./framework/Dockerfile-Jenkins
+    image: at-jenkins 
+    ports:
+      - "80:8080"
+      - "50000:50000"
+    volumes:
+      - /home/ec2-user/jenkins_home:/var/jenkins_home
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /usr/bin/docker:/usr/bin/docker
+
+

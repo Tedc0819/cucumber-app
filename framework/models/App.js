@@ -1,6 +1,5 @@
 const fs = require('fs');
 const View = require('./View.js')
-const Page = require('./Page.js')
 const ResourceManager = require('./ResourceManager.js')
 const path = require('path')
 const deepExtend = require('deep-extend')
@@ -37,7 +36,6 @@ class App {
 
   loadPage() {
     this.context.View = View
-    this.context.Page = Page
     this.context.ResourceManager = ResourceManager
     this.pages = this.importDir(this.pagePath)
 

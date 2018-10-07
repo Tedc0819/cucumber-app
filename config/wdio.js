@@ -47,7 +47,7 @@ module.exports = {
   connectionRetryTimeout: 90000,
   connectionRetryCount: 3,
   framework: 'cucumber',
-  reporters: ['dot', 'multiple-cucumber-html'],
+  reporters: process.env.REPORT_ENABLE === 'true' ? ['dot', 'multiple-cucumber-html'] : ['dot'],
   reporterOptions: {
     htmlReporter: {
       jsonFolder: reportDir,

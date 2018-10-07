@@ -9,6 +9,7 @@ class View {
     this.world = world
     this.driver = world
     this.sleepBeforeRun = 1000
+    this.waitForExist = 2000
     this.props = world.pageProps
   }
 
@@ -28,9 +29,42 @@ class View {
     return this.getSample(sample)
   }
 
+  wait(second) {
+    return this.driver.pause(second * 1000);
+  }
+
+  log(obj) {
+    if (!this.shouldLog) return
+    console.log(obj)
+  }
+
   click(elementId) {
     const selector = this.getSelector(elementId)
-    return this.driver.touch(selector)
+
+    return this.$(selector).touch()
+  }
+
+  $(selector) {
+    if (this.shouldLog) {
+      return this.$$(selector)[0]
+    }
+
+    this.driver.waitForExist(selector, this.waitForExist)
+    return $(selector)
+  }
+
+  $$(selector) {
+    this.driver.waitForExist(selector, this.waitForExist)
+
+    const elements = $$(selector)
+
+    this.log({
+      selector,
+      action: '$$',
+      matchedCount: elements.length,
+    })
+
+    return elements
   }
 
   /** getter **/
